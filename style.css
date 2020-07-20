@@ -1,0 +1,12 @@
+.listados{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    padding: 10px;
+    width: auto;
+    height: 200px;
+   
+}
+
+
+

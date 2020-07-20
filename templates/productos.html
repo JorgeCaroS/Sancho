@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clientes</title>
+
+    <link href="../style.css" 
+    rel="stylesheet" > 
+    
+    
+    
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+      integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    
+
+
+        <p class='h3'> Agregar Producto</p>
+        <form action="/addProduct" method="POST" enctype="multipart/form-data">
+        <input type="text" name="codigo" placeholder="codigo" />
+        <input type="text" name="categoria" placeholder="categoria" />
+        <input type="text" name="nombre" placeholder="nombre" />
+        <input type="text" name="precio" placeholder="precio" />
+        <input type="text" name="cantidad" placeholder="cantidad" />
+        <select name="estado">
+          <option>Disponible</option>
+          <option>No Disponible</option>
+        </select>
+
+        <br></br>
+        <button type="submit">
+          Crear Producto
+        </button>
+      </form>
+
+    <br></br>
+    <div class="listados" >
+      
+      <div class="listadoGeneral">
+        <p class='h3'>Listado de Productos </p>
+
+    <table class='table table-light table-striped table-hover table-responsive'>
+      <thead class="thead-dark">
+        <tr>
+          <th>Codigo</th>
+          <th>Categoria</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Cantidad</th>
+          <th>Estado</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for producto in productos %}
+        <tr>
+          <td>{{producto.0}}</td>
+          <td>{{producto.1}}</td>
+          <td>{{producto.2}}</td>
+          <td>{{producto.3}}</td>
+          <td>{{producto.4}}</td>
+          <td>{{producto.5}}</td>
+          <td>
+            <a href="/editproducto/{{producto.0}}"> Edit </a>
+            <a href="/deleteproducto/{{producto.0}}"> Delete </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="listadoDisponible">
+    <p class='h3'>Listado de Productos Disponibles </p>
+
+<table class='table table-light table-striped table-hover table-responsive'>
+  <thead class="thead-dark">
+    <tr>
+      <th>Codigo</th>
+      <th>Categoria</th>
+      <th>Nombre</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Estado</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for producto in productosD %}
+    <tr>
+      <td>{{producto.0}}</td>
+      <td>{{producto.1}}</td>
+      <td>{{producto.2}}</td>
+      <td>{{producto.3}}</td>
+      <td>{{producto.4}}</td>
+      <td>{{producto.5}}</td>      
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+  </body>
+</html>
