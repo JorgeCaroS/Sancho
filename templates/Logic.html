@@ -1,57 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<script>
+  </head>
+  <script>
+    function logic() {
+      let x = document.getElementById("text").value;
+      let z = parseInt(document.getElementById("desplazamiento").value);
+      let y = x.charCodeAt(0) - 65;
+      let clave = [];
+      let mensaje2 = [];
 
-    function logic( ){
-        let x = document.getElementById("text").value;
-        let z = parseInt(document.getElementById("desplazamiento").value);
-        let y = x.charCodeAt(0) - 65
-        let clave = [];
-                
-       document.getElementById("message-p1").innerHTML = y
-       
-       
-       let mensaje = x.split("");
+      //Leo el String ingresado y separo los caracteres
+      let mensaje = x.split("");
 
-       mensaje.map(letra =>{
-            console.log(letra)
-            let codigo = letra.charCodeAt(0) - 65 + z
-            clave.push(codigo)
-            console.log(codigo)
+      //Mapeo el arreglo para extraer el codigo de la letra UNICODE
+      // Y lo voy guardando en arreglo "clave"
+      mensaje.map((letra) => {
+        console.log(letra);
+        let codigo = letra.charCodeAt(0) - 65 + z;
+        console.log(codigo);
 
-       }
-       )
-        
+        // Si mi codigo es menor que cero quiere decir que superó el valor de la letra "Z"
+        if (codigo < 0) {
+          codigo = letra.charCodeAt(0) + -39 + z;
+        }
+        clave.push(codigo);
+        console.log(codigo);
+      });
 
-       
-       var res = clave.join();
-       let mensajeCifrado = String.fromCharCode(res) 
-       document.getElementById("message-p2").innerHTML = res
-       //final = clave.split("");
-       console.log(mensajeCifrado)
-       console.log(res)
-       
-        return console.log(clave)
+      //Mapeo el arreglo "Clave" y sumo el valor 65 para convertir a Unicode
+      clave.map((cifrado) => {
+        let mensajeCifrado = cifrado + 65;
+        mensaje2.push(mensajeCifrado);
+        console.log(mensajeCifrado);
+      });
+      
+      // Paso a String el spread del array de numeros Unicode
+      let mostrar = String.fromCharCode(...mensaje2);
+      document.getElementById("message-p2").innerHTML = mostrar;
 
-}
+      return console.log(clave);
+    }
+  </script>
+  <body>
+    <input type="text" id="text" name="message" placeholder="mensaje" />
+    <input
+      type="text"
+      id="desplazamiento"
+      name="message"
+      placeholder="desplazamiento"
+    />
+    <button onClick="logic()">Ver Mensaje</button>
 
-
-</script>
-<body>
- 
-    
-        <input type=text id="text" name="message" placeholder="mensaje">
-        <input type=text id="desplazamiento" name="message" placeholder="desplazamiento">
-        <button onClick="logic()" > Ver Mensaje </button>
-    
-
-    <p id="message-p1">  </p>
-    <p id="message-p2">  </p>
-    
-</body>
+    <p id="message-p1"></p>
+    <p id="message-p2"></p>
+  </body>
 </html>
