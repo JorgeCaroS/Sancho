@@ -51,6 +51,7 @@
 
     <table class='table table-light table-striped table-hover table-responsive'>
       <thead class="thead-dark">
+        
         <tr>
           <th>Nombre</th>
           <th>Cedula</th>
@@ -60,7 +61,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for cliente in clientes %}
+        {% for cliente in clientes2 %}
         <tr>
           <td>{{cliente.1}}</td>
           <td>{{cliente.0}}</td>
@@ -74,5 +75,35 @@
         {% endfor %}
       </tbody>
     </table>
+
+    <p class="h4"> Clientes Ordenados Por Compras</p>
+
+    <table class='table table-light table-striped table-hover table-responsive'>
+      <thead class="thead-dark">
+        <tr>
+          <th>Nombre</th>
+          <th>Cedula</th>
+          <th>Telefono</th>
+          <th>Direccion</th>
+          <th>Operaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for cliente in clientes %}
+        <tr>
+          <td>{{cliente.2}}</td>
+          <td>{{cliente.1}}</td>
+          <td>{{cliente.4}}</td>
+          <td>{{cliente.3}}</td>
+          <td>
+            <a href="/editcliente/{{cliente.0}}"> Editar </a>
+            <a href="/deletecliente/{{cliente.0}}"> Eliminar </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    
   </body>
 </html>

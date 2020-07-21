@@ -23,14 +23,25 @@ def Index():
 # Clientes --------------------------
 @app.route('/clientes')
 def Clientes():
-    cur = mysql.connection.cursor()
-    cur.execute('SELECT * FROM clientes')
+    cur = mysql.connection.cursor()    
+    cur.execute("""SELECT COUNT(F.cliente) , C.*
+                    FROM
+                    clientes C,
+                    facturas F
+                    WHERE
+                    C.cedula=F.cliente 
+                    GROUP BY F.cliente
+                    ORDER BY COUNT(F.cliente) DESC
+                """)
     data = cur.fetchall()
-    return render_template('clientes.html', clientes=data)
+    cur.execute('SELECT * FROM clientes')
+    data2 = cur.fetchall()
+    
+    return render_template('clientes.html', clientes=data, clientes2=data2)
 
 
 @app.route('/addUser', methods=["POST"])
-def addUser():
+def addUser():  
     if request.method == 'POST':
         cur = mysql.connection.cursor()
         cur.execute('SELECT * FROM clientes')
@@ -73,8 +84,7 @@ def deleteUSer(cedula):
 
 @app.route('/updatecliente/<cedula>', methods=['POST'])
 def updatecliente(cedula):
-    if request.method == 'POST':
-        #cedula = request.form['cedula']
+    if request.method == 'POST':        
         nombre = request.form['nombre']
         direccion = request.form['direccion']
         telefono = request.form['telefono']
